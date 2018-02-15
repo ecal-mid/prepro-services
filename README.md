@@ -1,7 +1,8 @@
 ## prepro-services
 cyril.diagne [at] ecal.ch
 
-Repository of services for.
+Repository of services for the video preprocessing pipeline of the spring creative coding course at ECAL M&ID Bachelor.
+
 Each service is configured and designed to be accessible through a kubernetes cluster via docker containers.
 
 *Note:* `video2frames` and `video2audio` will be run from the client directly.
