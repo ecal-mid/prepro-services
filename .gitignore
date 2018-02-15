@@ -1,0 +1,4 @@
+.DS_Store
+kubectl-admin.conf
+image2caption
+*.pyc

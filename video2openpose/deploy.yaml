@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: video2openpose-deployment
+  labels:
+    app: video2openpose
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  template:
+    metadata:
+      labels:
+        app: video2openpose
+    spec:
+      containers:
+      - name: video2openpose
+        image: kikko/video2openpose:latest
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 50051
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: video2openpose-service
+spec:
+  type: NodePort
+  ports:
+  - port: 50051
+    nodePort: 30002
+    targetPort: 50051
+  selector:
+    app: video2openpose
