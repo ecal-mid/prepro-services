@@ -1,9 +1,8 @@
 ## prepro-services
 cyril.diagne [at] ecal.ch
 
-Repository of services for the video preprocessing pipeline of the spring creative coding course at ECAL M&ID Bachelor.
+Repository of remote services for the video preprocessing pipeline of the spring creative coding course at ECAL M&ID Bachelor.
 
-Each service is configured and designed to be accessible through a kubernetes cluster via docker containers.
+Each service is configured and designed to be running within docker containers and accessed through the dedicated [cli](https://github.com/ecal-mid/prepro-cli).
 
-*Note:* `video2frames` and `video2audio` will be run from the client directly.
-The reason is that ffmpeg is broadly available and easy to install whereas video2<x> prepros are bandwidth intensive.
+Kubernetes deployment configuration files are also provider to quickly deploy in a local cluster using kubeadm.
