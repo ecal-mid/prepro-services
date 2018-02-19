@@ -1,6 +1,5 @@
 # From chriamue/openpose
 FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
-MAINTAINER diagne.cyril@gmail.com
 
 RUN apt-get update && apt-get install -y \
       build-essential \
