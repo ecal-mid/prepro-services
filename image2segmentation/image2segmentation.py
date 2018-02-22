@@ -42,23 +42,25 @@ class Bytes2Bytes(bytes2bytes_pb2_grpc.Bytes2BytesServicer):
         buff = BytesIO(request.input)
         img = Image.open(buff)
         results = model.detect([np.asarray(img)], verbose=1)
-
         r = results[0]
         # rois = r['rois']
         masks = r['masks']
-        classes = r['class_ids'],
+        classes = r['class_ids']
         # scores = r['scores']
-        masked_image = np.zeros((masks.shape[0], masks.shape[1]))
-        for i in range(len(classes[0])):
-            mask = masks[:, :, i]
-            masked_image[:, :] = np.where(mask == 1, masks[:, :, i] *
-                                          (classes[0][i] + 127),
-                                          masked_image[:, :])
+        if len(classes) == 0:
+            # No result found in this frame
+            masked_image = np.zeros((img.size[1], img.size[0]))
+        else:
+            masked_image = np.zeros((masks.shape[0], masks.shape[1]))
+            for i in range(len(classes[0])):
+                mask = masks[:, :, i]
+                masked_image[:, :] = np.where(mask == 1, masks[:, :, i] *
+                                              (classes[0][i] + 127),
+                                              masked_image[:, :])
 
         output = BytesIO()
-        Image.fromarray(
-            masked_image.astype('uint8'), mode='L').save(
-                output, format="PNG")
+        img = Image.fromarray(masked_image.astype('uint8'), mode='L')
+        img.save(output, format="PNG")
         value = output.getvalue()
         output.close()
 
