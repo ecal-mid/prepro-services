@@ -69,4 +69,4 @@ RUN touch /image2segmentation/Mask_RCNN/__init__.py
 
 WORKDIR /image2segmentation
 
-#ENTRYPOINT ["python3", "image2segmentation.py"]
+ENTRYPOINT ["python3", "image2segmentation.py"]
