@@ -47,15 +47,15 @@ class Bytes2Bytes(bytes2bytes_pb2_grpc.Bytes2BytesServicer):
         masks = r['masks']
         classes = r['class_ids']
         # scores = r['scores']
-        if len(classes) == 0:
+        if classes.size == 0:
             # No result found in this frame
             masked_image = np.zeros((img.size[1], img.size[0]))
         else:
             masked_image = np.zeros((masks.shape[0], masks.shape[1]))
-            for i in range(len(classes[0])):
+            for i in range(classes.size):
                 mask = masks[:, :, i]
                 masked_image[:, :] = np.where(mask == 1, masks[:, :, i] *
-                                              (classes[0][i] + 127),
+                                              (classes[i] + 127),
                                               masked_image[:, :])
 
         output = BytesIO()
