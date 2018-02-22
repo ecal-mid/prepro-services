@@ -18,7 +18,7 @@ spec:
         imagePullPolicy: Always
         ports:
           - containerPort: 50051
-	resources:
+        resources:
           limits:
             nvidia.com/gpu: 1
 ---
