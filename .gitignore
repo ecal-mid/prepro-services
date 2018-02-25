@@ -2,3 +2,7 @@
 kubectl-admin.conf
 image2caption
 *.pyc
+*.mov
+*.png
+*.zip
+*.wav
