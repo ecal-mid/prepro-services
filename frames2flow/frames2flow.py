@@ -64,7 +64,7 @@ class Frames2Bytes(frames2bytes_pb2_grpc.Frames2BytesServicer):
 
 def run():
 
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=1))
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     frames2bytes_pb2_grpc.add_Frames2BytesServicer_to_server(
         Frames2Bytes(), server)
     server.add_insecure_port('[::]:%i' % args.port)
