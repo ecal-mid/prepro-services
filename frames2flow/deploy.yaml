@@ -5,8 +5,7 @@ metadata:
   labels:
     app: frames2flow
 spec:
-  replicas: 12
-  revisionHistoryLimit: 2
+  replicas: 1
   template:
     metadata:
       labels:
