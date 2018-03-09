@@ -31,6 +31,7 @@ spec:
                   values:
                   - ecal-vr-2
                   - ecal-vr-3
+                  - cyril-zen-notebook
 ---
 apiVersion: v1
 kind: Service
