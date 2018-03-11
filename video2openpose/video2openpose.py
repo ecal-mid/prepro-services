@@ -49,8 +49,8 @@ class Bytes2Text(bytes2text_pb2_grpc.Bytes2TextServicer):
 def run():
     server = grpc.server(
         futures.ThreadPoolExecutor(max_workers=10),
-        options=[('grpc.max_send_message_length', MAX_MESSAGE_LENGTH),
-                 ('grpc.max_receive_message_length', MAX_MESSAGE_LENGTH)])
+        options=[('grpc.max_send_message_length', _MAX_MESSAGE_LENGTH),
+                 ('grpc.max_receive_message_length', _MAX_MESSAGE_LENGTH)])
     bytes2text_pb2_grpc.add_Bytes2TextServicer_to_server(Bytes2Text(), server)
     server.add_insecure_port('[::]:%i' % args.port)
     server.start()
