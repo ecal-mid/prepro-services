@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: video2openpose
-        image: kikko/video2openpose:latest
+        image: kikko/video2openpose:v3
         imagePullPolicy: Always
         ports:
           - containerPort: 50051
