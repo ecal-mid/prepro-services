@@ -3,17 +3,16 @@ MAINTAINER Cyril Diagne <diagne.cyril@gmail.com>
 
 RUN apt-get update
 
-RUN pip3 install --no-cache-dir --upgrade \
+RUN pip install --no-cache-dir --upgrade \
     grpcio
+
+RUN pip install --no-cache-dir --upgrade \
+    numpy
 
 WORKDIR /image2depth
 
-COPY FCRN-DepthPrediction .
+COPY FCRN_DepthPrediction FCRN_DepthPrediction
 COPY protos protos
-COPY image2depth.py /image2depth/
+COPY image2depth.py .
 
-#RUN touch /image2segmentation/Mask_RCNN/__init__.py
-
-#WORKDIR /image2segmentation
-
-ENTRYPOINT ["python3", "image2depth.py"]
+ENTRYPOINT ["python", "image2depth.py"]
