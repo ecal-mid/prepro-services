@@ -4,9 +4,7 @@ MAINTAINER Cyril Diagne <diagne.cyril@gmail.com>
 RUN apt-get update
 
 RUN pip install --no-cache-dir --upgrade \
-    grpcio
-
-RUN pip install --no-cache-dir --upgrade \
+    grpcio \
     numpy
 
 WORKDIR /image2depth
