@@ -10,10 +10,10 @@ WORKDIR /image2depth
 
 COPY FCRN-DepthPrediction .
 COPY protos protos
-COPY image2segmentation.py /image2segmentation/
+COPY image2depth.py /image2depth/
 
-RUN touch /image2segmentation/Mask_RCNN/__init__.py
+#RUN touch /image2segmentation/Mask_RCNN/__init__.py
 
-WORKDIR /image2segmentation
+#WORKDIR /image2segmentation
 
-ENTRYPOINT ["python3", "image2segmentation.py"]
+ENTRYPOINT ["python3", "image2depth.py"]
