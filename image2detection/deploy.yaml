@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: image2detection-deployment
+  labels:
+    app: image2detection
+spec:
+  replicas: 1
+  revisionHistoryLimit: 2
+  template:
+    metadata:
+      labels:
+        app: image2detection
+    spec:
+      containers:
+      - name: image2detection
+        image: kikko/image2detection:cpu
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 50051
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: image2detection-service
+spec:
+  type: NodePort
+  ports:
+  - port: 50051
+    nodePort: 30008
+    targetPort: 50051
+  selector:
+    app: image2detection
