@@ -40,10 +40,10 @@ class Bytes2Boxes(bytes2boxes_pb2_grpc.Bytes2BoxesServicer):
             detect.category = model.category_index[detected_class]['name']
             detect.score = result['detection_scores'][i]
             detected_box = result['detection_boxes'][i]
-            detect.x = detected_box[0]
-            detect.y = detected_box[1]
-            detect.width = detected_box[2]
-            detect.height = detected_box[3]
+            detect.x = detected_box[1]
+            detect.y = detected_box[0]
+            detect.width = detected_box[3] - detect.x
+            detect.height = detected_box[2] - detect.y
 
         return resp
 
