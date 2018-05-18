@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: image2detection
-        image: kikko/image2detection:cpu-v1
+        image: kikko/image2detection:gpu
         imagePullPolicy: Always
         ports:
           - containerPort: 50051
