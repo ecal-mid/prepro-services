@@ -5,7 +5,7 @@ metadata:
   labels:
     app: frames2sift
 spec:
-  replicas: 1
+  replicas: 2
   revisionHistoryLimit: 2
   template:
     metadata:
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frames2sift
-        image: kikko/frames2sift
+        image: kikko/frames2sift:v2
         imagePullPolicy: Always
         ports:
           - containerPort: 50051

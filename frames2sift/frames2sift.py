@@ -38,11 +38,16 @@ def get_matches(frame_a, frame_b):
     kp1, des1 = sift.detectAndCompute(frame_a, None)
     kp2, des2 = sift.detectAndCompute(frame_b, None)
 
-    # get matches
-    matches = flann.knnMatch(des1, des2, k=2)
+    matches = []
 
-    # ratio test as per Lowe's paper
-    matches = [m for (m, n) in matches if m.distance < 0.7 * n.distance]
+    if len(kp2) and len(kp1):
+        # get matches
+        try:
+            matches = flann.knnMatch(des1, des2, k=2)
+            # ratio test as per Lowe's paper
+            matches = [m for (m, n) in matches if m.distance < 0.7 * n.distance]
+        except Exception:
+            print('could not match keypoints')
 
     return {'kp1': kp1, 'kp2': kp2, 'matches': matches}
 
@@ -81,10 +86,11 @@ class Frames2Sift(frames2sift_pb2_grpc.Frames2SiftServicer):
             pt.x = kp.pt[0]
             pt.y = kp.pt[1]
         for m in result['matches']:
-            mp = resp.matches.add()
-            mp.keypointA = m.queryIdx
-            mp.keypointB = m.trainIdx
-            mp.distance = m.distance
+            if hasattr(m, 'queryIdx'):
+                mp = resp.matches.add()
+                mp.keypointA = m.queryIdx
+                mp.keypointB = m.trainIdx
+                mp.distance = m.distance
         print('load: %.2fs, compute: %.2fs, total: %.2fs' % (
             (t2 - t1), (t3 - t2), (time.time() - t1)))
         return resp
