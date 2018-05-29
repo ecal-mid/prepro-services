@@ -14,6 +14,7 @@ from protos import bytes2bytes_pb2
 from protos import bytes2bytes_pb2_grpc
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
+_MAX_MESSAGE_LENGTH = 200 * 1024 * 1024
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--framerate', default=60, help='Framerate to export')
@@ -47,7 +48,10 @@ class Bytes2Bytes(bytes2bytes_pb2_grpc.Bytes2BytesServicer):
 
 
 def run():
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    server = grpc.server(
+        futures.ThreadPoolExecutor(max_workers=10),
+        options=[('grpc.max_send_message_length', _MAX_MESSAGE_LENGTH),
+                 ('grpc.max_receive_message_length', _MAX_MESSAGE_LENGTH)])
     bytes2bytes_pb2_grpc.add_Bytes2BytesServicer_to_server(
         Bytes2Bytes(), server)
     server.add_insecure_port('[::]:%i' % args.port)

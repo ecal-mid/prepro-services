@@ -8,18 +8,11 @@ from protos import bytes2bytes_pb2_grpc
 
 parser = argparse.ArgumentParser()
 parser.add_argument(
-    '-i', '--input', default='../_test_data/mono.wav', help='Input file')
+    '-i', '--input', default='_test_data/mono_large.wav', help='Input file')
 parser.add_argument(
-    '-o',
-    '--output',
-    default='../_test_data/spectrogram.png',
-    help='Output file')
+    '-o', '--output', default='_test_data/spectrogram.png', help='Output file')
 parser.add_argument(
-    # '-r', '--rpc_url', default='localhost:50051', help='RPC url')
-    '-r',
-    '--rpc_url',
-    default='ecal-nuc-1:30001',
-    help='RPC url')
+    '-r', '--rpc_url', default='localhost:50051', help='RPC url')
 args = parser.parse_args()
 
 

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: audio2spectrogram
-        image: kikko/audio2spectrogram:0.0.1
+        image: kikko/audio2spectrogram:0.0.2
         imagePullPolicy: Always
         ports:
           - containerPort: 50051
