@@ -7,9 +7,10 @@ from protos import bytes2features_pb2
 from protos import bytes2features_pb2_grpc
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-i', '--input', default='test.png', help='Input file')
 parser.add_argument(
-    '-r', '--rpc_url', default='localhost:50051', help='RPC url')
+    '-i', '--input', default='_test_data/test.png', help='Input file')
+parser.add_argument(
+    '-r', '--rpc_url', default='10.192.155.08:30007', help='RPC url')
 args = parser.parse_args()
 
 

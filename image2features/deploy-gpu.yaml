@@ -1,19 +1,19 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: image2features-deployment
+  name: image2features-gpu-deployment
   labels:
-    app: image2features
+    app: image2features-gpu
 spec:
   replicas: 1
   revisionHistoryLimit: 2
   template:
     metadata:
       labels:
-        app: image2features
+        app: image2features-gpu
     spec:
       containers:
-      - name: image2features
+      - name: image2features-gpu
         image: kikko/image2features:gpu
         imagePullPolicy: Always
         ports:
@@ -22,7 +22,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: image2features-service
+  name: image2features-gpu-service
 spec:
   type: NodePort
   ports:
@@ -30,4 +30,4 @@ spec:
     nodePort: 30007
     targetPort: 50051
   selector:
-    app: image2features
+    app: image2features-gpu
