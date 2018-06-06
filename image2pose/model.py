@@ -7,11 +7,11 @@ import cv2
 import numpy as np
 
 import sys
-sys.path.insert(0, 'tf-pose-estimation/tf_pose')
+sys.path.insert(0, 'tf-pose-estimation')
 
-import common
-from estimator import TfPoseEstimator
-from networks import get_graph_path, model_wh
+from tf_pose import common
+from tf_pose.estimator import TfPoseEstimator
+from tf_pose.networks import get_graph_path, model_wh
 
 estimator = None
 NUM_JOINTS = common.CocoPart.Background.value
