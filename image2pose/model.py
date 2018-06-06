@@ -40,7 +40,7 @@ def run(image, resize_out_ratio=4.0):
     return humans
 
 
-def load(model='cmu', resize='656x368'):
+def load(model='mobilenet_thin', resize='656x368'):
     w, h = model_wh(resize)
     global estimator
     if w == 0 or h == 0:
