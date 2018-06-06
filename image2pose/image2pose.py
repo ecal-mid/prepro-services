@@ -18,6 +18,7 @@ import image2pose_pb2_grpc
 import model
 
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
+_MAX_MESSAGE_LENGTH = 200 * 1024 * 1024
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-p', '--port', default=50051, help='GRPC port')
@@ -55,7 +56,10 @@ class Image2Pose(image2pose_pb2_grpc.Image2PoseServicer):
 def run():
     model.load()
 
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    server = grpc.server(
+        futures.ThreadPoolExecutor(max_workers=10),
+        options=[('grpc.max_send_message_length', _MAX_MESSAGE_LENGTH),
+                 ('grpc.max_receive_message_length', _MAX_MESSAGE_LENGTH)])
     image2pose_pb2_grpc.add_Image2PoseServicer_to_server(Image2Pose(), server)
     server.add_insecure_port('[::]:%i' % args.port)
     server.start()

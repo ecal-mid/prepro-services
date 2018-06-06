@@ -16,7 +16,9 @@ WORKDIR /root/tf-pose-estimation/
 
 RUN cd /root/tf-pose-estimation/ && pip install -r requirements.txt
 
-WORKDIR /root/tf-pose-estimation/src/pafprocess
+WORKDIR /root/tf-pose-estimation/tf_pose/pafprocess
+
+RUN ls
 RUN swig -python -c++ pafprocess.i && python setup.py build_ext --inplace
 
 RUN pip install --no-cache-dir --upgrade \
