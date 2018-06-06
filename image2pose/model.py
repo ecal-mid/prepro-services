@@ -7,7 +7,7 @@ import cv2
 import numpy as np
 
 import sys
-sys.path.insert(0, 'tf-pose-estimation/src')
+sys.path.insert(0, 'tf-pose-estimation/tf_pose')
 
 import common
 from estimator import TfPoseEstimator
