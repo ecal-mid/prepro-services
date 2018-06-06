@@ -27,5 +27,6 @@ RUN pip install --no-cache-dir --upgrade \
 WORKDIR /root
 COPY model.py model.py
 COPY image2pose.py image2pose.py
+COPY protos protos
 
 ENTRYPOINT ["python", "image2pose.py"]
