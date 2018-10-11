@@ -1,0 +1,12 @@
+apiVersion: skaffold/v1alpha3
+kind: Config
+build:
+  artifacts:
+  - imageName: gcr.io/cilex-common/image2faces-gpu
+    docker:
+      dockerfilePath: ./deploy/gpu.Dockerfile
+  local: {}
+deploy:
+  kubectl:
+    manifests:
+    - deploy/gpu.k8.yaml
