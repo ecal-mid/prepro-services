@@ -35,6 +35,8 @@ class Image2Faces(image2faces_pb2_grpc.Image2FacesServicer):
         # Run detection.
         buff = BytesIO(request.input)
         img = Image.open(buff)
+        if img.mode != 'RGB':
+            img = img.convert('RGB')
         img_array = np.array(img, np.uint8)
         result = model.run(img_array)
         print('found %s faces' % len(result))
