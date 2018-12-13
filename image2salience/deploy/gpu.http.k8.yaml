@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: image2salience-gpu-http-deployment
+  labels:
+    app: image2salience-gpu-http
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: image2salience-gpu-http
+    spec:
+      containers:
+      - name: image2salience
+        image: 'gcr.io/cilex-collection/image2salience-gpu-http'
+        imagePullPolicy: Always
+        ports:
+          - containerPort: 5001
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: image2salience-gpu-http-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 5001
+  selector:
+    app: image2salience-gpu-http

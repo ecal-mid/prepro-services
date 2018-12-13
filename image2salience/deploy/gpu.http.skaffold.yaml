@@ -1,0 +1,12 @@
+apiVersion: skaffold/v1beta1
+kind: Config
+build:
+  artifacts:
+  - image: gcr.io/cilex-collection/image2salience-gpu-http
+    docker:
+      dockerfile: ./deploy/gpu.http.Dockerfile
+  local: {}
+deploy:
+  kubectl:
+    manifests:
+    - deploy/gpu.http.k8.yaml
