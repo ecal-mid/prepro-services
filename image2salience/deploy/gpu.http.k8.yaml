@@ -1,11 +1,14 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: image2salience-gpu-http-deployment
   labels:
     app: image2salience-gpu-http
 spec:
-  replicas: 1
+  replicas: 0
+  selector:
+    matchLabels:
+      app: image2salience-gpu-http
   template:
     metadata:
       labels:
