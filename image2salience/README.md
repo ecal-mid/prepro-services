@@ -2,7 +2,14 @@
 
 Computes salience masks using:  https://github.com/Joker316701882/Salient-Object-Detection
 
-##1 - Test model (via virtualenv):
+First you must clone the model's repo:
+```
+git clone https://github.com/Joker316701882/Salient-Object-Detection
+```
+Then download the pretrained weights from [here](https://drive.google.com/drive/folders/0B6l9O8aWij8fUGtVNldUTXA4eHc) and put
+the `salience_model_v1` folder in `/Salient-Object-Detection/`.
+
+## 1 - Test model (via virtualenv):
 
 a) setup virtualenv
 ```
@@ -16,7 +23,7 @@ b) run model
 python model_test.py
 ```
 
-##2 - Test model in HTTP Server (via virtualenv):
+## 2 - Test model in HTTP Server (via virtualenv):
 
 a) setup virtualenv
 
@@ -30,7 +37,7 @@ b) test server
 python image2salience_http_test.py
 ```
 
-##3 - Test HTTP Server in Docker:
+## 3 - Test HTTP Server in Docker:
 
 a) build docker image
 ```
@@ -48,7 +55,7 @@ python image2salience_http_test.py
 ```
 
 
-##3 - Test Docker image in Kubernetest (via skaffold):
+## 3 - Test Docker image in Kubernetest (via skaffold):
 
 a) deploy image on dev cluster in dev mode
 ```

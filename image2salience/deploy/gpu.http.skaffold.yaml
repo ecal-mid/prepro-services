@@ -2,7 +2,7 @@ apiVersion: skaffold/v1beta1
 kind: Config
 build:
   artifacts:
-  - image: gcr.io/cilex-collection/image2salience-gpu-http
+  - image: gcr.io/{{.PROJECT_ID}}/image2salience-gpu-http
     docker:
       dockerfile: ./deploy/gpu.http.Dockerfile
   local: {}

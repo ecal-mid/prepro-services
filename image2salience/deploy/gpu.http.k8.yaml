@@ -5,7 +5,7 @@ metadata:
   labels:
     app: image2salience-gpu-http
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: image2salience-gpu-http
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: image2salience
-        image: 'gcr.io/cilex-collection/image2salience-gpu-http'
+        image: 'gcr.io/{{.PROJECT_ID}}/image2salience-gpu-http'
         imagePullPolicy: Always
         ports:
           - containerPort: 5001
