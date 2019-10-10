@@ -1,32 +1,23 @@
 import base64
 import os
 import json
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Response
 from io import BytesIO
 from PIL import Image
 import numpy as np
 import logging
 import model
-# import argparse
 
-# parser = argparse.ArgumentParser()
-# parser.add_argument('--model_path', type=str,
-#     help='model meta graph',
-#     default = 'Salient-Object-Detection/meta_graph/my-model.meta')
-# parser.add_argument('--checkpoint_path', type=str,
-#     help='model checkpoint',
-#     default = 'Salient-Object-Detection/salience_model_v1')
-# args = parser.parse_args()
 model_path = 'Salient-Object-Detection/meta_graph/my-model.meta'
 checkpoint_path = 'Salient-Object-Detection/salience_model_v1'
 model.load(model_path, checkpoint_path)
 
-def base64_png_to_numpy(data):
-    buff = BytesIO(base64.b64decode(data))
+def image_to_numpy(data):
+    buff = BytesIO(data)
     img = Image.open(buff)
     return np.array(img)
 
-def np_image_to_base64(data):
+def np_image_to_png(data):
     output = BytesIO()
     img = Image.fromarray(data.astype('uint8'), mode='L')
     img.save(output, format="PNG")
@@ -46,10 +37,11 @@ def check():
 
 @app.route('/run', methods=['POST'])
 def run():
-    b64_image = request.get_data()
-    img = base64_png_to_numpy(b64_image)
-    result = model.run(img)
-    return np_image_to_base64(result)
+    original_image = request.get_data()
+    np_arr = image_to_numpy(original_image)
+    result = model.run(np_arr)
+    salience_image = np_image_to_png(result)
+    return Response(salience_image, mimetype='image/png')
 
 
 # error handles
